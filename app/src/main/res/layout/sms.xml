@@ -6,28 +6,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter your Mobile number:"
-        android:textSize="17dp"
-        android:layout_marginTop="100dp"
-        android:id="@+id/txt"
+        android:text="Enter your code:"
+        android:layout_marginTop="180dp"
+        android:textSize="18dp"
         />
 
+
     <EditText
-        android:layout_width="270dp"
+        android:id="@+id/edittxt"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:layout_below="@+id/txt"
-        android:ems="10"
-        android:id="@+id/editText" />
+        android:inputType="text"
+        />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
-        android:id="@+id/button2"
-        android:layout_marginRight="30dp"
+        android:id="@+id/button3"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:onClick="next"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginRight="30dp"
+        android:onClick="next"/>
+
 </LinearLayout>

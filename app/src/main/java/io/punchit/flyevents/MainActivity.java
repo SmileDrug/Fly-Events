@@ -1,14 +1,18 @@
 package io.punchit.flyevents;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -21,6 +25,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 
 import org.json.JSONObject;
 
@@ -32,7 +37,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
 
-
+    Button loginButton;
+    Button signupButton;
+    String usernametxt;
+    String passwordtxt;
+    EditText password;
+    EditText username;
+    EditText email;
 
     public static final List<String> permissions = new ArrayList<String>() {{
         add("public_profile");
@@ -63,8 +74,80 @@ public class MainActivity extends AppCompatActivity {
         dACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(dACL, true);
 
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
 
+        loginButton = (Button) findViewById(R.id.login);
+        signupButton = (Button) findViewById(R.id.signup);
+
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                usernametxt = username.getText().toString();
+                passwordtxt = password.getText().toString();
+
+                ParseUser.logInInBackground(usernametxt, passwordtxt, new LogInCallback() {
+                    @Override
+                    public void done(ParseUser user, ParseException e) {
+                        if (user != null) {
+                            Intent intent = new Intent(MainActivity.this, form_1.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "This user doesn't exist..Please sign up!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+
+        });
+
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, signup.class);
+                startActivity(intent);
+                finish();
+
+            }
+
+        });
     }
+
+
+    public void forget(View view) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setMessage("Enter your Email:");
+// Create TextView
+
+        final EditText input1 = new EditText(this);
+        alert.setView(input1);
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                ParseUser.requestPasswordResetInBackground(input1.getText().toString(), new RequestPasswordResetCallback() {
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(getApplicationContext(), "Email successfully sent!!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Eroorrr!!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+        alert.show();
+    }
+
 
     public void get_details() {
         GraphRequest request = GraphRequest.newMeRequest(
