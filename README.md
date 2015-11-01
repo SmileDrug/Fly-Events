@@ -6,6 +6,16 @@
 **Inspiration** : _**Prem Ganpathy**_ is our main inspiration. He came From a small village around tamil-nadu and <br>became INDIA's World Best Dosha-king.<br>
 -In Early stages he face many problem to make his stall more famous but luckily because of his good nature and awesome Doshas he made it.<br>
 <br>
+
+**Technologies That We Are Using** : <br> 
+
+_Parse_  for Mobile Back end as a service . <br>
+_Exotel_ for SMS Confirmation.<br>
+_P2i_ rest API to convert web to image.<br>
+_Python(Flask)_ to makeing Rest API for communication realted puposes . <br>
+_Heroku_ to Depoly python Rest API.<br>
+<br>
+
 **Why fly@events** :<br>
                                _problem 1_ : Small Business (For Business Owner)<br>
                                _problem 2_ : Lack of Information(For Event Manager)<br>
