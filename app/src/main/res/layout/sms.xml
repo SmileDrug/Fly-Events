@@ -28,6 +28,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
-        android:onClick="next"/>
+        />
 
 </LinearLayout>

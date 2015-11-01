@@ -31,10 +31,11 @@ public class Welcome extends AppCompatActivity {
     public void next(View view) {
         ParseUser usr = ParseUser.getCurrentUser();
         String mobileNumber = mobileno.getText().toString();
+
         usr.put("Phone",mobileNumber);
         usr.saveInBackground();
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("http://192.168.137.245:5000/mobileConfirmation?phoneno=" + mobileNumber, new AsyncHttpResponseHandler() {
+        client.get("http://fly-events.herokuapp.com/mobileConfirmation?phoneno=" + mobileNumber, new AsyncHttpResponseHandler() {
 
             @Override
             public void onStart() {

@@ -28,6 +28,12 @@
         </activity>
         <activity android:name=".form_1" >
         </activity>
+        <activity android:name=".form_org" >
+        </activity>
+        <activity android:name=".form_pro" >
+        </activity>
+        <activity android:name=".image" >
+        </activity>
 
         <activity
             android:name="com.facebook.FacebookActivity"
